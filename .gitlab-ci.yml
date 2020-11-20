@@ -1,0 +1,19 @@
+image: node:10.16-alpine
+
+pages:
+  cache:
+    paths:
+    - node_modules/
+  stage: deploy
+  script:
+  - npm install -g @angular/cli
+  - npm install
+  - ng build --prod --base-href /client/
+  - mv dist/client public
+  - cp public/index.html public/404.html
+  artifacts:
+    paths:
+    - public
+  # only:
+  # - master
+
